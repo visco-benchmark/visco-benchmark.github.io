@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description"
+          content="VISCO: Benchmarking Fine-Grained Critique and Correction Towards Self-Improvement in Visual Reasoning">
+    <meta name="keywords" content="VISCO">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>VISCO: Benchmarking Fine-Grained Critique and Correction Towards Self-Improvement in Visual Reasoning</title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script> -->
+    <!-- <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+  /Users/panlu/Library/Mobile Documents/com~apple~CloudDocs/ImageMath/visual-mathqa-server/data_final/images
+      gtag('js', new Date());
+
+      gtag('config', 'G-PYVRSFMDRL');
+    </script> -->
+
+    <link rel="icon" href="./static/images/icon.png">
+
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+    <link rel="stylesheet" href="./static/css/bulma.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="./static/css/index.css">
+    <link rel="stylesheet" href="./static/css/leaderboard.css">
+
+    <!-- <link href="https://unpkg.com/tabulator-tables@5.5.2/dist/css/tabulator_bulma.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.5.2/dist/js/tabulator.min.js"></script> -->
+    <script type="text/javascript" src="static/js/sort-table.js" defer></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+    <script src="./static/js/explorer-index.js"></script>
+    <script src="./static/js/question_card.js"></script>
+
+    <script src="./static/js/leaderboard_testmini.js"></script>
+    <script src="./data/results/output_folders.js" defer></script>
+    <script src="./data/results/model_scores.js" defer></script>
+
+    <script src="./visualizer/data/data_public.js" defer></script>
+</head>
+<body>
+
+
+<section class="hero">
+    <div class="hero-body">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered">
+                <div class="column has-text-centered">
+                    <h1 class="title is-1 publication-title is-bold">
+                        <img src="static/images/icon.png" style="width:1em;vertical-align: middle" alt="Logo"/>
+                        <span style="vertical-align: middle">VISCO</span>
+                    </h1>
+                    <h2 class="subtitle is-4 publication-subtitle">
+                        Benchmarking Fine-Grained Critique and Correction Towards Self-Improvement in Visual Reasoning
+                    </h2>
+                    <div class="is-size-5 publication-authors">
+            <span class="author-block">
+	      <a href="https://shirley-wu.github.io/">Xueqing Wu</a><sup>*<span style="color:#6fbf73">1</span></sup>,</span>
+                        <span class="author-block">
+	      <a href="https://www.linkedin.com/in/yuheng-ding/">Yuheng Ding</a><sup>*<span
+                                style="color:#6fbf73">1</span></sup>,</span>
+                        <span class="author-block">
+              <a href="https://bingxuanli.com/">Bingxuan Li</a><sup
+                                style="color:#6fbf73">1</sup>,</span>
+                        <span class="author-block">
+              <a href="https://lupantech.github.io/">Pan Lu</a><sup style="color:#ffac33">2</sup>,</span>
+                        <span class="author-block">
+              <a href="https://wadeyin9712.github.io/">Da Yin</a><sup
+                                style="color:#6fbf73">1</sup>,</span>
+                        <span class="author-block">
+              <a href="https://web.cs.ucla.edu/~kwchang/">Kai-Wei Chang</a><sup style="color:#6fbf73">1</sup>,</span>
+                        <span class="author-block">
+              <a href="https://violetpeng.github.io/">Nanyun Peng</a><sup
+                                style="color:#6fbf73">1</sup></span>
+                        <br/>
+                    </div>
+
+                    <div class="is-size-5 publication-authors">
+                        <span class="author-block"><sup style="color:#6fbf73">1</sup>University of California Los Angeles,</span>
+                        &nbsp&nbsp<span class="author-block"><sup style="color:#ffac33">2</sup>Stanford</span>
+                    </div>
+
+                    <span class="link-block">
+                <a href="https://arxiv.org/pdf/2412.02172"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+                    <span class="link-block">
+                <a href="https://arxiv.org/abs/2412.02172"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+                    <!-- Code Link. -->
+                    <span class="link-block">
+                <a href="https://github.com/PlusLabNLP/VISCO"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+
+                    <span class="link-block">
+                <a href="https://huggingface.co/datasets/uclanlp/VISCO"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <p style="font-size:15px">📁</p>
+                  </span>
+                  <span>Data</span>
+                  </a>
+              </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container" style="margin-top: -150px; margin-bottom: -100px;">
+        <div class="columns is-centered m-6">
+            <div class="column is-full has-text-centered content">
+                <div id="results-carousel" class="carousel results-carousel">
+                    <div class="box m-5">
+                        <div class="content has-text-centered">
+                            <img src="static/images/teaser.jpg" alt="geometric reasoning" width="84%"/>
+                            <p><br/><b>Overview of VISCO task, data and evaluation.</b> Based on an image, a question
+                                and an initial model response, VISCO evaluates two tasks, critique and correction.
+                                Correction is performed on top of critique.</p>
+                        </div>
+                    </div>
+                    <div class="box m-5">
+                        <div class="content has-text-centered">
+                            <img src="static/images/teaser_small.jpg" alt="geometric reasoning" width="84%"/>
+                            <p><b>Left:</b> Evaluation settings of VISCO. We evaluate two settings for the correction
+                                task.&nbsp&nbsp<b>Right:</b> Scaling curve for critique performance.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+
+<section class="section">
+    <div class="container" style="margin-bottom: 2vh;">
+        <!-- Abstract. -->
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-3">Introduction</h2>
+                <div class="content has-text-justified">
+                    <p>
+                        The ability of large vision-language models (LVLMs) to critique and correct their reasoning is
+                        an essential building block towards their <b>self-improvement</b>, but a systematic analysis of
+                        such capabilities is still lacking.</p>
+                    <p>
+                        To bridge this gap, we propose <b>VISCO</b>, the first benchmark to extensively analyze the
+                        critique and correction capabilities of LVLMs. VISCO features dense and fine-grained critique,
+                        where LVLMs are required to evaluate the correctness of <b>each step</b> in the
+                        chain-of-thought, and then provide <b>natural language explanations</b> to support their
+                        judgments.</p>
+                    <p>
+                        We have conducted an extensive evaluation of <b>24 LVLMs</b>. Our results show that
+                        human-written critiques significantly helps correction, while the model-generated critiques are
+                        less helpful and sometimes detrimental to the performance. This showcases the potential of the
+                        self-improvement and also reveals critique is the crucial bottleneck. We identified <b>three
+                        failure patterns</b> in critique: failure to critique visual perception, reluctance to "say no",
+                        and exaggerated assumption of error propagation.
+                        We further explore a <span style="font-variant: small-caps; font-weight: bold;">LookBack</span>
+                        strategy that improves critique performance by revisiting the image and verifying each piece of
+                        information.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!--/ Abstract. -->
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+
+        <div class="columns is-centered">
+            <div class="column is-full has-text-centered content">
+                <h2 class="title is-3" id="leaderboard_test">Leaderboard</h2>
+                <p>Click <b><u>metrics</u></b> to sort the leaderboard.</p>
+                <div class="content">
+                    <table class="js-sort-table" id="results">
+                        <thead>
+                        <tr>
+                            <th rowspan="2" class="js-sort-number"><strong><u>#</u></strong></th>
+                            <th rowspan="2" class="js-sort-none"><strong>Model</strong></th>
+                            <th rowspan="2" class="js-sort-none"><strong>Source</strong></th>
+                            <th colspan="4" class="js-sort-none"><strong>Critique</strong></th>
+                            <th colspan="2" class="js-sort-none"><strong>Correction Gain</strong></th>
+                        </tr>
+                        <tr style="background:#ddd">
+                            <th class="js-sort-number"><u>VISCore🏅</u></th>
+                            <th class="js-sort-number"><u>Ans. F1</u></th>
+                            <th class="js-sort-number"><u>Step F1</u></th>
+                            <th class="js-sort-number"><u>Ex. F1</u></th>
+                            <th class="js-sort-number"><u>Human Critique</u></th>
+                            <th class="js-sort-number"><u>Model Critique</u></th>
+                        </tr>
+                        </thead>
+                        <tr>
+                            <td style="background:#E6FFE6">-</td>
+                            <td style="background:#E6FFE6"><b style="color:#006400">Human*</b></td>
+                            <td style="background:#E6FFE6"></td>
+                            <td style="background:#E6FFE6"><b style="color:#006400">86.47</b></td>
+                            <td style="background:#E6FFE6">100.0</td>
+                            <td style="background:#E6FFE6">90.6</td>
+                            <td style="background:#E6FFE6">71.4</td>
+                            <td style="background:#E6FFE6"></td>
+                            <td style="background:#E6FFE6"></td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td><b class="best-score-text"> GPT-4o-2024-08-06 🥇</b></td>
+                            <td><a href="https://arxiv.org/abs/2412.02172" class="ext-link" style="font-size: 16px;">Link</a></td>
+                            <td><b class="best-score-text">52.36</b></td>
+                            <td>63.0</td>
+                            <td>57.2</td>
+                            <td>39.8</td>
+                            <td>76.2</td>
+                            <td>28.8</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><b class="best-score-text"> Claude-3.5-Sonnet-20240620 🥈</b></td>
+                            <td><a href="https://arxiv.org/abs/2412.02172" class="ext-link" style="font-size: 16px;">Link</a></td>
+                            <td><b class="best-score-text">51.28</b></td>
+                            <td>61.8</td>
+                            <td>58.1</td>
+                            <td>37.6</td>
+                            <td>73.7</td>
+                            <td>25.6</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td><b class="best-score-text"> Gemini-1.5-Pro 🥉</b></td>
+                            <td><a href="https://arxiv.org/abs/2412.02172" class="ext-link" style="font-size: 16px;">Link</a></td>
+                            <td><b class="best-score-text">45.01</b></td>
+                            <td>55.6</td>
+                            <td>51.2</td>
+                            <td>32.0</td>
+                            <td>78.0</td>
+                            <td>24.9</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>LLaVA-Critic-72B</td>
+                            <td><a href="https://arxiv.org/abs/2412.02172" class="ext-link" style="font-size: 16px;">Link</a></td>
+                            <td>42.60</td>
+                            <td>53.9</td>
+                            <td>50.9</td>
+                            <td>28.2</td>
+                            <td>58.9</td>
+                            <td>15.4</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Qwen2-VL-72B</td>
+                            <td><a href="https://arxiv.org/abs/2412.02172" class="ext-link" style="font-size: 16px;">Link</a></td>
+                            <td>37.44</td>
+                            <td>49.2</td>
+                            <td>41.9</td>
+                            <td>25.5</td>
+                            <td>31.5</td>
+                            <td><span style="color:red">-2.1</span></td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>Llama-3.2-90B</td>
+                            <td><a href="https://arxiv.org/abs/2412.02172" class="ext-link" style="font-size: 16px;">Link</a></td>
+                            <td>36.40</td>
+                            <td>46.8</td>
+                            <td>42.5</td>
+                            <td>24.3</td>
+                            <td>66.4</td>
+                            <td>4.4</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>Molmo-72B</td>
+                            <td><a href="https://arxiv.org/abs/2412.02172" class="ext-link" style="font-size: 16px;">Link</a></td>
+                            <td>35.59</td>
+                            <td>49.4</td>
+                            <td>39.8</td>
+                            <td>22.9</td>
+                            <td>53.1</td>
+                            <td>1.4</td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>LLaVA-OV-72B</td>
+                            <td><a href="https://arxiv.org/abs/2412.02172" class="ext-link" style="font-size: 16px;">Link</a></td>
+                            <td>35.27</td>
+                            <td>47.1</td>
+                            <td>42.0</td>
+                            <td>22.2</td>
+                            <td>33.4</td>
+                            <td><span style="color:red">-10.2</span></td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td>NVLM-72B</td>
+                            <td><a href="https://arxiv.org/abs/2412.02172" class="ext-link" style="font-size: 16px;">Link</a></td>
+                            <td>33.07</td>
+                            <td>44.0</td>
+                            <td>38.6</td>
+                            <td>21.3</td>
+                            <td>42.2</td>
+                            <td>1.7</td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>InternVL2-40B</td>
+                            <td><a href="https://arxiv.org/abs/2412.02172" class="ext-link" style="font-size: 16px;">Link</a></td>
+                            <td>28.48</td>
+                            <td>41.6</td>
+                            <td>31.4</td>
+                            <td>17.7</td>
+                            <td>47.6</td>
+                            <td>9.9</td>
+                        </tr>
+                        <tr>
+                            <td>11</td>
+                            <td>InternVL2-76B</td>
+                            <td><a href="https://arxiv.org/abs/2412.02172" class="ext-link" style="font-size: 16px;">Link</a></td>
+                            <td>26.38</td>
+                            <td>37.7</td>
+                            <td>28.6</td>
+                            <td>17.0</td>
+                            <td>72.7</td>
+                            <td>11.7</td>
+                        </tr>
+                        <tr>
+                            <td>12</td>
+                            <td>InternVL2-26B</td>
+                            <td><a href="https://arxiv.org/abs/2412.02172" class="ext-link" style="font-size: 16px;">Link</a></td>
+                            <td>25.20</td>
+                            <td>39.4</td>
+                            <td>30.2</td>
+                            <td>13.4</td>
+                            <td>59.3</td>
+                            <td>6.0</td>
+                        </tr>
+                        <tr>
+                            <td>13</td>
+                            <td>InternVL2-8B</td>
+                            <td><a href="https://arxiv.org/abs/2412.02172" class="ext-link" style="font-size: 16px;">Link</a></td>
+                            <td>23.33</td>
+                            <td>37.1</td>
+                            <td>31.1</td>
+                            <td>11.0</td>
+                            <td>52.7</td>
+                            <td>5.4</td>
+                        </tr>
+                        <tr>
+                            <td>14</td>
+                            <td>LLaVA-v1.6-7B</td>
+                            <td><a href="https://arxiv.org/abs/2412.02172" class="ext-link" style="font-size: 16px;">Link</a></td>
+                            <td>21.80</td>
+                            <td>44.6</td>
+                            <td>33.6</td>
+                            <td>6.9</td>
+                            <td>40.3</td>
+                            <td><span style="color:red">-8.7</span></td>
+                        </tr>
+                        <tr>
+                            <td>15</td>
+                            <td>Qwen2-VL-7B</td>
+                            <td><a href="https://arxiv.org/abs/2412.02172" class="ext-link" style="font-size: 16px;">Link</a></td>
+                            <td>21.71</td>
+                            <td>43.0</td>
+                            <td>30.6</td>
+                            <td>7.8</td>
+                            <td>50.8</td>
+                            <td>5.5</td>
+                        </tr>
+                        <tr>
+                            <td>16</td>
+                            <td>LLaVA-v1.6-13B</td>
+                            <td><a href="https://arxiv.org/abs/2412.02172" class="ext-link" style="font-size: 16px;">Link</a></td>
+                            <td>21.02</td>
+                            <td>40.2</td>
+                            <td>32.8</td>
+                            <td>7.1</td>
+                            <td>40.2</td>
+                            <td><span style="color:red">-7.2</span></td>
+                        </tr>
+                        <tr>
+                            <td>17</td>
+                            <td>LLaVA-Critic-7B</td>
+                            <td><a href="https://arxiv.org/abs/2412.02172" class="ext-link" style="font-size: 16px;">Link</a></td>
+                            <td>20.02</td>
+                            <td>32.0</td>
+                            <td>28.7</td>
+                            <td>8.8</td>
+                            <td>19.3</td>
+                            <td><span style="color:red">-11.4</span></td>
+                        </tr>
+                        <tr>
+                            <td>18</td>
+                            <td>Prometheus-Vision-13B</td>
+                            <td><a href="https://arxiv.org/abs/2412.02172" class="ext-link" style="font-size: 16px;">Link</a></td>
+                            <td>19.32</td>
+                            <td>38.0</td>
+                            <td>37.8</td>
+                            <td>5.0</td>
+                            <td>-<sup>†</sup></td>
+                            <td>-<sup>†</sup></td>
+                        </tr>
+                        <tr>
+                            <td>19</td>
+                            <td>Prometheus-Vision-7B</td>
+                            <td><a href="https://arxiv.org/abs/2412.02172" class="ext-link" style="font-size: 16px;">Link</a></td>
+                            <td>17.67</td>
+                            <td>37.6</td>
+                            <td>35.8</td>
+                            <td>4.1</td>
+                            <td>-<sup>†</sup></td>
+                            <td>-<sup>†</sup></td>
+                        </tr>
+                        <tr>
+                            <td>20</td>
+                            <td>Molmo-7B</td>
+                            <td><a href="https://arxiv.org/abs/2412.02172" class="ext-link" style="font-size: 16px;">Link</a></td>
+                            <td>13.43</td>
+                            <td>35.5</td>
+                            <td>22.0</td>
+                            <td>3.1</td>
+                            <td>49.1</td>
+                            <td>1.8</td>
+                        </tr>
+                        <tr>
+                            <td>21</td>
+                            <td>Llama-3.2-11B</td>
+                            <td><a href="https://arxiv.org/abs/2412.02172" class="ext-link" style="font-size: 16px;">Link</a></td>
+                            <td>11.44</td>
+                            <td>29.4</td>
+                            <td>21.1</td>
+                            <td>2.4</td>
+                            <td>34.8</td>
+                            <td><span style="color:red">-11.7</span></td>
+                        </tr>
+                        <tr>
+                            <td>22</td>
+                            <td>LLaVA-v1.6-34B</td>
+                            <td><a href="https://arxiv.org/abs/2412.02172" class="ext-link" style="font-size: 16px;">Link</a></td>
+                            <td>11.05</td>
+                            <td>23.6</td>
+                            <td>14.3</td>
+                            <td>4.0</td>
+                            <td>39.2</td>
+                            <td><span style="color:red">-1.7</span></td>
+                        </tr>
+                        <tr>
+                            <td>23</td>
+                            <td>LLaVA-OV-7B</td>
+                            <td><a href="https://arxiv.org/abs/2412.02172" class="ext-link" style="font-size: 16px;">Link</a></td>
+                            <td>7.53</td>
+                            <td>14.5</td>
+                            <td>14.9</td>
+                            <td>2.0</td>
+                            <td>22.4</td>
+                            <td><span style="color:red">-9.1</span></td>
+                        </tr>
+                        <tr>
+                            <td>24</td>
+                            <td>DeepSeek-VL-7B</td>
+                            <td><a href="https://arxiv.org/abs/2412.02172" class="ext-link" style="font-size: 16px;">Link</a></td>
+                            <td>7.53</td>
+                            <td>21.8</td>
+                            <td>15.7</td>
+                            <td>1.2</td>
+                            <td>2.3</td>
+                            <td><span style="color:red">-17.9</span></td>
+                        </tr>
+                        <tr>
+                            <td style="background:#F3E5F5" value="max">-</td>
+                            <td style="background:#F3E5F5"><b style="color:#301934">Random</b></td>
+                            <td style="background:#F3E5F5"></td>
+                            <td style="background:#F3E5F5">-</td>
+                            <td style="background:#F3E5F5">37.9</td>
+                            <td style="background:#F3E5F5">32.0</td>
+                            <td style="background:#F3E5F5">-</td>
+                            <td style="background:#F3E5F5"></td>
+                            <td style="background:#F3E5F5"></td>
+                        </tr>
+                    </table>
+                    <b style="color:#006400">Human Performance* :</b> Performed by expert human annotators. Measured on
+                    265 data points rather than full test set due to annotation cost.
+                    <br>
+                    <b style="color:red">Negative correction gain :</b> Correction brings more harm than benefits to
+                    task performance.
+                    <br>
+                    <b>No correction results † :</b> After specialized training, Prometheus-Vision models lack general
+                    question answering
+                    capability and cannot perform correction.
+                    <br><br>
+                    <div>
+                        <p>🚨 To submit your results to the leaderboard, please send to <a
+                                href="xueqing.wu@cs.ucla.edu">this email</a> with your result json files.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- DATASET SECTION -->
+<section class="hero is-light is-small">
+    <div class="hero-body has-text-centered">
+        <h1 class="title is-1">
+            <span style="vertical-align: middle">VISCO Dataset</span>
+        </h1>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="columns is-centered has-text-centered">
+            <!-- <div class="column is-full-width has-text-centered"> -->
+            <div class="column is-four-fifths">
+                <div class="content has-text-justified">
+                    <p>
+                        <b>VISCO</b> is the first benchmark to evaluate the critique and correction capabilities of
+                        LVLMs. The dataset spans 18 datasets and 8 tasks across two main categories: (1)
+                        <b style="color:#4682B4">reasoning</b> tasks, such as math and science reasoning, and (2)
+                        <b style="color:#AA6C39">perception</b> tasks, such as text recognition, spatial relationship
+                        understanding, and prevention of hallucination.
+                    </p>
+                    <p>
+                        We sample model responses with chain-of-thoughts from 7 LVLMs, and ask expert human annotators
+                        to produce ground-truth critiques. We collect <b>dense and fine-grained</b> critique, with a
+                        binary correctness label for each step followed by a natural language
+                        explanation if the step is incorrect. In total, we collect <b>1645 pairs</b> of questions and
+                        LVLM-generated answers, including <b>5604 step-wise annotations</b>.
+                    </p>
+                    <p>You can download the dataset on <a href="TODO_HF">Huggingface Dataset</a>.</p>
+                </div>
+            </div>
+        </div>
+        <div class="columns is-centered">
+            <div class="column" style="margin-right: -20rem;">
+                <div class="content has-text-centered">
+                    <img src="static/images/statistics.png" style="max-width: 40%;"/>
+                    <p>Categories, tasks and datasets distribution of VISCO.</p>
+                </div>
+            </div>
+            <div class="column">
+                <div class="content has-text-centered">
+                    <img src="static/images/statistics_table.png" style="max-width: 55%;"/>
+                    <p>Statistics of VISCO.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="columns is-centered m-6">
+            <div class="column is-full has-text-centered content">
+                <h2 class="title is-3">Examples</h2>
+                <div id="results-carousel" class="carousel results-carousel">
+                    <div class="box m-5">
+                        <div class="content has-text-centered">
+                            <img src="static/images/examples/examples.1.jpg" width="56%"/>
+                            <p>Category: Reasoning. Task: Math. Dataset: MathVista.</p>
+                        </div>
+                    </div>
+                    <div class="box m-5">
+                        <div class="content has-text-centered">
+                            <img src="static/images/examples/examples.2.jpg" width="72%"/>
+                            <p>Category: Reasoning. Task: Science. Dataset: SceMQA.</p>
+                        </div>
+                    </div>
+                    <div class="box m-5">
+                        <div class="content has-text-centered">
+                            <img src="static/images/examples/examples.3.jpg" width="82%"/>
+                            <p>Category: Reasoning. Task: Humanities. Dataset: MMMU.</p>
+                        </div>
+                    </div>
+                    <div class="box m-5">
+                        <div class="content has-text-centered">
+                            <img src="static/images/examples/examples.4.jpg" width="56%"/>
+                            <p>Category: Perception. Task: Hallucination. Dataset: POPE.</p>
+                        </div>
+                    </div>
+                    <div class="box m-5">
+                        <div class="content has-text-centered">
+                            <img src="static/images/examples/examples.5.jpg" width="56%"/>
+                            <p>Category: Perception. Task: Spatial relationship. Dataset: VSR.</p>
+                        </div>
+                    </div>
+                    <div class="box m-5">
+                        <div class="content has-text-centered">
+                            <img src="static/images/examples/examples.6.jpg" width="56%"/>
+                            <p>Category: Perception. Task: OCR. Dataset: TextVQA.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- RESULTS SECTION -->
+<section class="hero is-light is-small">
+    <div class="hero-body has-text-centered">
+        <h1 class="title is-1">Experiment Results</h1>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="columns is-centered has-text-centered">
+            <!-- <div class="column is-full-width has-text-centered"> -->
+            <div class="column is-four-fifths"> <!-- style="max-width: 50%;"> -->
+                <div class="content has-text-justified">
+                    <p><b>Key takeaways:</b></p>
+                    <ol>
+                        <li>Critique capability typically emerges in <b>∼70B LVLMs</b>. LVLMs with <70B parameters
+                            often perform <span style="color: red">even worse than random guessing</span>.
+                        </li>
+                        <li>
+                            <b>Specialized training</b> as in <a
+                                href="https://prometheus-eval.github.io/prometheus-vision/">Prometheus-Vision</a> and <a
+                                href="https://llava-vl.github.io/blog/2024-10-03-llava-critic/">LLaVA-Critic</a>
+                            improves critique performance.
+                        </li>
+                        <li>
+                            As shown below, when <b style="color:#006400">human critiques</b> are available, top
+                            LVLMs can correct <b>over 70% errors</b>, and fine-grained critique consistently brings
+                            improvements.
+                        </li>
+                        <li>
+                            In contrast, model-generated critiques are less effective and can sometimes
+                            even <span style="color: red">hurt the performance</span>.
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="columns is-centered m-6">
+            <div class="column is-full has-text-centered content">
+                <img src="static/images/correction_full.png" style="max-width: 90%;"/>
+                <p>Correction performance given human-generated or model-generated critiques with different
+                    granularity.</p>
+            </div>
+        </div>
+        <div class="column is-full has-text-centered content">
+            <h2 class="title is-3">Critique Failure Patterns</h2>
+            <div id="results-carousel" class="carousel results-carousel">
+                <div class="box m-5">
+                    <div class="content has-text-justified" style="width: 80%; margin: 8pt auto;">
+                        <p><b>Failure to critique visual perception.</b> LVLMs' critique performance on perception tasks
+                            is consistently lower than on reasoning tasks. Even in reasoning tasks, a <b
+                                    style="color: red">significant portion</b> of errors are also caused by either
+                            <u>perception</u> (38%) or a combination of <u>perception and reasoning</u> (22%).</p>
+                        <p>An error case is shown below:</p>
+                    </div>
+                    <br/>
+                    <div class="content has-text-centered">
+                        <img src="static/images/case1.jpg" width="45%"/>
+                    </div>
+                </div>
+                <div class="box m-5">
+                    <div class="content has-text-justified" style="width: 80%; margin: 8pt auto;">
+                        <p><b>Reluctance to "say no".</b> LVLMs they are more likely to judge an answer or step as
+                            correct rather than incorrect.</p>
+                        <p>As shown below, <b style="color:red">all models</b> predict "Incorrect" less frequently than
+                            the ground truth annotations. Some models like LLaVA-1.6-34B identify an extremely low
+                            percentage of inputs as incorrect, resulting in notably poor performance.</p>
+                        <p>
+                            As pointed out by <a href="https://arxiv.org/abs/2310.14566">previous work</a>, a potential
+                            reason for this bias is imbalanced instruction tuning data, as instruction tuning typically
+                            encourages models to agree with users.</p>
+                    </div>
+                    <br/>
+                    <div class="content has-text-centered">
+                        <img src="static/images/yesno_bias.jpg" width="40%"/>
+                    </div>
+                </div>
+                <div class="box m-5">
+                    <div class="content has-text-justified" style="width: 80%; margin: 8pt auto;">
+                        <p><b>Exaggerated assumption of error propagation.</b> In the sequential chain-of-thought,
+                            errors may naturally propagate from earlier steps to later ones. However, we observe that
+                            LVLMs exhibit a much <b style="color: red">stronger bias</b> in expecting errors to
+                            propagate.</p>
+                        <p>An error case is shown below. The model critique mistakenly believes the error in step 4
+                            is propagated to step 5, while in fact step 5 is based on step 3 and thus independent from
+                            the error in step 4.
+                        </p>
+                    </div>
+                    <br/>
+                    <div class="content has-text-centered">
+                        <img src="static/images/case2.jpg" width="45%"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="hero is-light is-small">
+    <div class="hero-body has-text-centered">
+        <h1 class="title is-1"><span class="mathvista">LookBack</span>: Improved Baseline</h1>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="columns is-centered">
+            <div class="column is-half">
+                <div class="content has-text-centered">
+                    <h2>Method Overview</h2>
+                    <p style="width: 80%; margin: auto; text-align: justify;">For each step in the chain-of-thought,
+                        <span class="mathvista">LookBack</span> (1) extracts a set of <u>atomic information</u>
+                        that needs verification, (2) answers each question individually based on the image, and
+                        (3) accordingly produces the final critique.</p>
+                    <br/>
+                    <img src="static/images/ours_critic.jpg" style="max-width: 70%;"/>
+                </div>
+            </div>
+            <div class="column is-half">
+                <div class="content has-text-centered">
+                    <h2>Results</h2>
+                    <p style="width: 80%; margin: auto; text-align: justify;"><span class="mathvista">LookBack</span>
+                        significantly enhances the critique performance on <b>four leading LVLMs</b>. When applied to
+                        the correction task, critique generated by <span class="mathvista">LookBack</span>
+                        brings notable improvements.
+                    </p>
+                    <br/>
+                    <img src="static/images/lookback_results.png" style="max-width: 60%;"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="columns is-centered m-6">
+        <div class="column is-full has-text-centered content">
+            <h2 class="title is-3">Qualitative Example</h2>
+            <img src="static/images/example_ours.jpg" style="max-width: 65%;"/>
+        </div>
+    </div>
+    </div>
+</section>
+
+<section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+        <h2 class="title is-3 has-text-centered">BibTeX</h2>
+        <pre><code>@misc{wu2024viscobenchmarkingfinegrainedcritique,
+      title={VISCO: Benchmarking Fine-Grained Critique and Correction Towards Self-Improvement in Visual Reasoning}, 
+      author={Xueqing Wu and Yuheng Ding and Bingxuan Li and Pan Lu and Da Yin and Kai-Wei Chang and Nanyun Peng},
+      year={2024},
+      eprint={2412.02172},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2412.02172}, 
+}</code></pre>
+    </div>
+</section>
+
+<footer class="footer">
+    <!-- <div class="container"> -->
+    <div class="content has-text-centered">
+    </div>
+    <div class="columns is-centered">
+        <div class="column is-8">
+            <div class="content">
+                <p>
+                    This website is website adapted from <a href="https://nerfies.github.io/">Nerfies</a> and <a
+                        href="https://mathvista.github.io/">MathVista</a>, licensed under a
+                    <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons
+                        Attribution-ShareAlike 4.0 International License</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- </div> -->
+</footer>
+
+</body>
+</html>
